@@ -5,19 +5,20 @@ plan 11;
 
 use IO::Dir;
 
-with IO::Dir.new.open: '.' {
+given IO::Dir.new.open: '.' {
     is $_, IO::Dir;
     is .dir, Seq;
     is .dir.grep({.basename eq 't'}), True;
     is .close, IO::Dir;
 }
 
-with IO::Dir.new.open: 'test-dir' {
+given IO::Dir.new.open: 't/test-dir' {
     is $_, IO::Dir;
-    is .dir, Seq;
-    is .dir[0].resolve, 't/one'.IO.resolve;
-    is .dir[1].resolve, 't/three'.IO.resolve;
-    is .dir[2].resolve, 't/two'.IO.resolve;
-    is .dir[3].defined, False;
+    my $res = .dir;
+    is $res, Seq;
+    is $res.map({.WHAT}).unique, (IO::Path,);
+    is $res.map({.absolute}).sort.List,
+      <one two three>.map({'t/test-dir'.IO.add($_).IO.absolute}).sort.List;
+    is $res[3].defined, *.not;
     is .close, IO::Dir;
 }
