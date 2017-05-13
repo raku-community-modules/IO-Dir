@@ -7,7 +7,7 @@
     "tags"         : [ "IO", "filesystem" ],
     "depends"      : [ ],
     "test-depends" : [
-        "Test",
+        "Testo",
         "Test::META"
     ],
     "provides"     : {

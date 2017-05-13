@@ -8,28 +8,30 @@ has str $!path;
 has str $!abspath;
 
 method open(IO() $dir = '.', :$absolute) {
-    $!path := $dir;
-    $!SPEC = $!path.SPEC;
+    $!SPEC = $dir.SPEC;
     my str $dir-sep  = $!SPEC.dir-sep;
-    $!relative = !$absolute && !$!path.is-absolute;
+    $!relative = !$absolute && !$dir.is-absolute;
 
-    $!abspath = $!path.absolute.ends-with: $dir-sep
-      ?? $!path.absolute
-      !! $!path.absolute ~ $dir-sep;
+    $!abspath = $dir.absolute.ends-with($dir-sep)
+      ?? $dir.absolute
+      !! $dir.absolute ~ $dir-sep;
 
-    $!path = $!path eq '.' || $!path eq $dir-sep
+    $!path = $dir.path eq '.' || $dir.path eq $dir-sep
       ?? ''
-      !! $!path.ends-with($dir-sep)
-        ?? $!path
-        !! $!path ~ $dir-sep;
+      !! $dir.path.ends-with($dir-sep)
+        ?? $dir.path
+        !! $dir.path ~ $dir-sep;
 
-    $!dirh := nqp::opendir(nqp::unbox_s($dir.absolute));
+    $!dirh := nqp::opendir(nqp::unbox_s($!abspath));
     self
 }
 
-method close { $!dirh and nqp::closedir($!dirh) }
+method close {
+    $!dirh and nqp::closedir($!dirh);
+    self
+}
 
-method dir(IO::Path:D:
+method dir(::?CLASS:D:
     Mu :$test = $*SPEC.curupdir,
     :$absolute,
     :$Str,
@@ -43,6 +45,7 @@ method dir(IO::Path:D:
        my $cwd = $CWD.IO; # faster than `temp`
       { my $*CWD = $cwd;
         nqp::until(
+          nqp::isnull_s(my str $str-elem = nqp::nextfiledir($!dirh))
             || nqp::iseq_i(nqp::chars($str-elem),0),
           nqp::if(
             $test.ACCEPTS($str-elem),
@@ -54,12 +57,8 @@ method dir(IO::Path:D:
                 $!relative,
                 (take IO::Path.new(
                   nqp::concat($!path,$str-elem),:$!SPEC,:$CWD)),
-                (take IO::Path!new-from-absolute-path(
-                  nqp::concat($!abspath,$str-elem),:$!SPEC,:$CWD))
-              )
-            )
-          )
-        );
+                (take IO::Path.new(
+                  nqp::concat($!abspath,$str-elem),:$!SPEC,:$CWD))))));
         self.close
       }
     }
