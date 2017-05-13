@@ -32,6 +32,52 @@ file descriptor you can close without relying on GC or having to [fully
 reify](https://docs.perl6.org/language/glossary#index-entry-Reify)
 the dir's `Seq`.
 
+# METHODS
+
+## `.new`
+
+Creates a new `IO::Dir` object. Takes no args.
+
+## `.open`
+
+Opens for reading directory given as a positional argument, which can be
+any object that can be coerced to `IO::Path` via `.IO` method. Defaults to
+opening `'.'` directory.
+
+Will first `.close` the invocant if it was previously opened.
+
+```perl6
+    $dir1.open;
+    $dir2.open: 'foo';
+```
+
+## `.dir`
+
+Same arguments as
+[`IO::Path.dir`](https://docs.perl6.org/routine/dir), that have the same
+meaning, returning the same type of `Seq`. Will `.close` the invocant when
+the result is exhausted.
+
+**Note:** you cannot call `.dir` more than once; re-open the
+invocant or create a new `IO::Dir` if you need that. Will die if called on
+an un-opened `IO::Dir`.
+
+```perl6
+    # Explicit close:
+    .dir[^3].say and .close with IO::Dir.open: 'foo';
+
+    # Implicit close (arrays are mostly-eager, so our Seq is exhausted here)
+    my @files = IO::Dir.open('foo').dir;
+```
+
+## `.close`
+
+Closes an open `IO::Dir`, freeing the file descriptor.
+
+```perl6
+    .dir[^3].say and .close with IO::Dir.open: 'foo';
+```
+
 ----
 
 #### REPOSITORY

@@ -1,14 +1,15 @@
 use lib <lib>;
 use Testo;
 
-plan 11;
+plan 10;
 
 use IO::Dir;
 
 given IO::Dir.new.open: '.' {
     is $_, IO::Dir;
-    is .dir, Seq;
-    is .dir.grep({.basename eq 't'}), True;
+    my $res = .dir;
+    is $res, Seq;
+    is $res.grep({.basename eq 't'}), True;
     is .close, IO::Dir;
 }
 
