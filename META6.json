@@ -2,12 +2,12 @@
     "perl"         : "6.c",
     "name"         : "IO::Dir",
     "license"      : "Artistic-2.0",
-    "version"      : "1.001001",
+    "version"      : "1.001002",
     "description"  : "IO::Path.dir you can close",
     "tags"         : [ "IO", "filesystem" ],
     "depends"      : [ ],
     "test-depends" : [
-        "Testo",
+        "Testo:ver('1.002002')",
         "Test::META"
     ],
     "provides"     : {
