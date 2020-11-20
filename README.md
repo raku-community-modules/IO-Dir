@@ -6,7 +6,7 @@ IO::Dir - IO::Path.dir you can close
 
 # SYNOPSIS
 
-```perl6
+```raku
     # Won't always suit, since non-exhausted iterator holds on to an open
     # file descriptor until GC:
     'foo'.IO.dir[^3].say;
@@ -46,7 +46,7 @@ opening `'.'` directory.
 
 Will first `.close` the invocant if it was previously opened.
 
-```perl6
+```raku
     $dir1.open;
     $dir2.open: 'foo';
 ```
@@ -54,7 +54,7 @@ Will first `.close` the invocant if it was previously opened.
 ## `.dir`
 
 Takes similar arguments as
-[`IO::Path.dir`](https://docs.perl6.org/routine/dir), that have the same
+[`IO::Path.dir`](https://docs.raku.org/routine/dir), that have the same
 meaning, returning the same type of `Seq`. Will `.close` the invocant when
 the result is exhausted.
 
@@ -65,7 +65,7 @@ return paths as `IO::Path` or `Str` objects.
 invocant or create a new `IO::Dir` if you need that. Will die if called on
 an un-opened `IO::Dir`.
 
-```perl6
+```raku
     # Explicit close:
     .dir[^3].say and .close with IO::Dir.open: 'foo';
 
@@ -77,7 +77,7 @@ an un-opened `IO::Dir`.
 
 Closes an open `IO::Dir`, freeing the file descriptor.
 
-```perl6
+```raku
     .dir[^3].say and .close with IO::Dir.open: 'foo';
 ```
 
@@ -86,12 +86,12 @@ Closes an open `IO::Dir`, freeing the file descriptor.
 #### REPOSITORY
 
 Fork this module on GitHub:
-https://github.com/zoffixznet/perl6-IO-Dir
+https://github.com/raku-community-modules/IO-Dir
 
 #### BUGS
 
 To report bugs or request features, please use
-https://github.com/zoffixznet/perl6-IO-Dir/issues
+https://github.com/raku-community-modules/IO-Dir/issues
 
 #### AUTHOR
 
