@@ -16,7 +16,7 @@
     "IO::Dir": "lib/IO/Dir.pm6"
   },
   "support": {
-    "source": "https://github.com/raku-community-modules/IO-Dir"
+    "source": "https://github.com/raku-community-modules/IO-Dir.git"
   },
   "license": "Artistic-2.0",
   "tags": [
