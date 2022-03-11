@@ -1,18 +1,26 @@
 {
-    "perl"         : "6.c",
-    "name"         : "IO::Dir",
-    "license"      : "Artistic-2.0",
-    "version"      : "1.001003",
-    "description"  : "IO::Path.dir you can close",
-    "tags"         : [ "IO", "filesystem" ],
-    "depends"      : [ ],
-    "test-depends" : [
-        "Testo",
-        "Test::META"
-    ],
-    "provides"     : {
-        "IO::Dir" : "lib/IO/Dir.pm6"
-    },
-    "authors"       : ["Zoffix Znet"],
-    "support"       : {"source"   : "https://github.com/raku-community-modules/IO-Dir.git"}
+  "name": "IO::Dir",
+  "description": "IO::Path.dir you can close",
+  "version": "1.001003",
+  "perl": "6.c",
+  "authors": [
+    "Zoffix Znet"
+  ],
+  "auth": "zef:raku-community-modules",
+  "depends": [],
+  "test-depends": [
+    "Testo",
+    "Test::META"
+  ],
+  "provides": {
+    "IO::Dir": "lib/IO/Dir.pm6"
+  },
+  "support": {
+    "source": "https://github.com/raku-community-modules/IO-Dir.git"
+  },
+  "license": "Artistic-2.0",
+  "tags": [
+    "IO",
+    "filesystem"
+  ]
 }
