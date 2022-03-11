@@ -1,7 +1,7 @@
 {
   "name": "IO::Dir",
   "description": "IO::Path.dir you can close",
-  "version": "1.001003",
+  "version": "1.001004",
   "perl": "6.c",
   "authors": [
     "Zoffix Znet"
@@ -16,7 +16,7 @@
     "IO::Dir": "lib/IO/Dir.pm6"
   },
   "support": {
-    "source": "https://github.com/raku-community-modules/IO-Dir.git"
+    "source": "https://github.com/raku-community-modules/IO-Dir"
   },
   "license": "Artistic-2.0",
   "tags": [
