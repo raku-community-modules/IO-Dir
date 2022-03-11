@@ -37,9 +37,6 @@ method close {
     $!dirh and try nqp::closedir($!dirh);
     self
 }
-submethod DESTROY(::?CLASS:D:) {
-    self.close
-}
 
 method dir(::?CLASS:D:
     Mu :$test = $*SPEC.curupdir,
