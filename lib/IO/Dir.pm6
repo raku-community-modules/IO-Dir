@@ -9,7 +9,7 @@ has str $!abspath;
 has Seq $!result;
 
 method open(IO() $dir = '.', :$absolute) {
-    self.close;
+    # self.close;
     $!dir = $dir;
     CATCH { default {
         fail X::IO::Dir.new(
@@ -74,7 +74,7 @@ method dir(::?CLASS:D:
                   nqp::concat($!path,$str-elem),:$!SPEC,:$CWD)),
                 (take IO::Path.new(
                   nqp::concat($!abspath,$str-elem),:$!SPEC,:$CWD))))));
-        self.close
+        # self.close
       }
     }
     $!result
