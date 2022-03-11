@@ -17,10 +17,10 @@ IO::Dir - IO::Path.dir you can close
 
 # DESCRIPTION
 
-[`IO::Path.dir`](https://docs.perl6.org/routine/dir) does the job well for
+[`IO::Path.dir`](https://docs.raku.org/routine/dir) does the job well for
 most cases, however, there's an edge case where it's no good:
 
-- You don't exhaust or [eagerly](https://docs.perl6.org/routine/eager)
+- You don't exhaust or [eagerly](https://docs.raku.org/routine/eager)
     evaluate the `Seq` `dir` returns
 - You do that enough times in some tight loop that
 [GC](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science))
@@ -29,7 +29,7 @@ doesn't get a chance to clean up unreachable `dir` `Seq`s; or
 
 If you're in that category, then good news! `IO::Dir` gives you a `dir` whose
 file descriptor you can close without relying on GC or having to [fully
-reify](https://docs.perl6.org/language/glossary#index-entry-Reify)
+reify](https://docs.raku.org/language/glossary#index-entry-Reify)
 the dir's `Seq`.
 
 # METHODS
